@@ -1,0 +1,20 @@
+default: &default
+  adapter:  postgresql
+  encoding: unicode
+  host:     <%= ENV['POSTGRES_HOST'] || 'localhost' %>
+  pool:     <%= ENV['POSTGRES_POOL'] || 5 %>
+  username: <%= ENV['POSTGRES_USERNAME'] || 'postgres' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: pdc_salespitcher_development
+
+test:
+  <<: *default
+  database: pdc_salespitcher_test
+
+production:
+  <<: *default
+  database: pdc_salespitcher_production
+  password: <%= ENV['PDC-SALESPITCHER_DATABASE_PASSWORD'] %>
