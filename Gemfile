@@ -14,8 +14,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml'
 gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'jquery-rails'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'devise'
+gem 'devise-bootstrap-views'
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -36,7 +37,9 @@ group :development do
 end
 
 group :test do
+  gem 'shoulda-matchers'
   gem 'database_cleaner'
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

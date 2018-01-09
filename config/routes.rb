@@ -1,3 +1,12 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users
+  devise_for :admins
+
+  authenticated :admin do
+    root 'admin/users#index', as: :authenticated_root
+  end
+
+  namespace :admin do
+    resources :users
+  end
 end
