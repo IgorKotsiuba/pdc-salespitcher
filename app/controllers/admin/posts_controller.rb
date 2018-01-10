@@ -51,6 +51,6 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def permitted_params
-    params.require(:post).permit(:title, :body, :attachments_cache, attachments: [])
+    params.require(:post).permit(:title, :body, :group_id, :attachments_cache, attachments: [])
   end
 end

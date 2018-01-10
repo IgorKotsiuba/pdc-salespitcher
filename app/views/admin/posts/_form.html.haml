@@ -1,34 +1,11 @@
-= form_for([:admin, post], html: { class: 'form-horizontal post' }) do |f|
-  - if post.errors.any?
-    #error_expl.panel.panel-danger
-      .panel-heading
-        %h3.panel-title
-          = pluralize(post.errors.count, 'error')
-          prohibited this post from being saved:
-      .panel-body
-        %ul
-          - post.errors.full_messages.each do |msg|
-            %li= msg
+= simple_form_for [:admin, post], html: { class: 'form-horizontal post' } do |f|
+  .col-md-12
+    = f.input :title
+    = f.input :body, as: :text
+    = f.association :group, prompt: "Choose a group"
+    = f.input :attachments, as: :file, multiple: true
+    = f.input :attachments_cache, as: :hidden
   .form-group
-    = f.label :title, class: 'control-label col-sm-2'
-    .col-sm-10
-      = f.text_field :title, class: 'form-control'
-    = f.error_span(:title)
-  .form-group
-    = f.label :body, class: 'control-label col-sm-2'
-    .col-sm-10
-      = f.text_field :body, class: 'form-control'
-    = f.error_span(:body)
-  .form-group
-    = f.label :attachments, class: 'control-label col-sm-2'
-    .col-sm-10
-      = f.file_field :attachments, multiple: true, class: 'form-control'
-      = f.hidden_field :attachments_cache
-      - if post.attachments.present?
-        - @post.attachments.each do |attachment|
-          = image_tag(attachment.thumb)
-    = f.error_span(:attachments)
-  .form-group
-    .col-sm-offset-2.col-sm-10
+    .col-sm-12
       = f.submit nil, class: 'btn btn-primary'
       = link_to t('.cancel', default: t("helpers.links.cancel")), admin_posts_path, class: 'btn btn-default'
