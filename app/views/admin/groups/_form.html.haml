@@ -1,0 +1,8 @@
+= simple_form_for [:admin, group], html: { class: 'form-horizontal group' } do |f|
+  .col-md-12
+    = f.input :name
+    = f.association :users, as: :check_boxes, collection: User.all.map{ |user| [user.full_name, user.id] }
+  .form-group
+    .col-sm-12
+      = f.submit nil, class: 'btn btn-primary'
+      = link_to t('.cancel', default: t("helpers.links.cancel")), admin_groups_path, class: 'btn btn-default'
