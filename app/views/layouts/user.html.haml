@@ -9,6 +9,7 @@
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
   %body
+    = bootstrap_flash
     .navbar.navbar-default.navbar-static-top
       .container
         %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -19,12 +20,9 @@
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
             %li= link_to 'Posts', user_posts_url
-            %li= link_to 'User Groups', admin_groups_url
     .container
       .row
         .col-sm-12
-          = bootstrap_flash
           = yield
-      %footer
-        %p © Company 2018
-    / /container
+  %footer
+    %p.text-center © Company 2018
