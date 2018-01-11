@@ -1,0 +1,35 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=Edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "PdcSalespitcher"
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", :media => "all"
+  %body
+    = bootstrap_flash
+    .navbar.navbar-default.navbar-static-top
+      .container
+        %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{:href => "#"} PdcSalespitcher
+        .navbar-collapse.collapse.navbar-responsive-collapse
+          %ul.nav.navbar-nav
+            %li= link_to 'Posts', user_posts_url
+            - if user_signed_in?
+              %li
+                %a{:href => "mailto:#{current_user.email}"}= current_user.email
+              %li
+                = link_to('Logout', destroy_user_session_path, method: :delete, class: 'navbar-link')
+    .container
+      .row
+        .col-sm-12
+          = yield
+    %footer
+      %p.text-center © Company 2018
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}

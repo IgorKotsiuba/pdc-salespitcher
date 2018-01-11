@@ -1,0 +1,6 @@
+%h3
+  Dear,
+  %span= @user.full_name
+%p You have been mentioned at new post: #{@post.title}.
+%p Please, follow the link in order to read it
+%p= link_to 'Review Post', "#{Rails.application.secrets[:root_url]}/user/posts/#{@post.uuid}"

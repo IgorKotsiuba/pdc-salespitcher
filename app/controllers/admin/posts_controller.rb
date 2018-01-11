@@ -20,6 +20,7 @@ class Admin::PostsController < Admin::ApplicationController
 
     respond_to do |format|
       if @post.save
+        send_notification_to_users(@post)
         format.html { redirect_to admin_post_path(@post), notice: 'Post was successfully created.' }
       else
         format.html { render :new }
@@ -51,6 +52,12 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def permitted_params
-    params.require(:post).permit(:title, :body, :attachments_cache, attachments: [])
+    params.require(:post).permit(:title, :body, :group_id, :attachments_cache, attachments: [])
+  end
+
+  def send_notification_to_users(post)
+    post.group.users.each do |user|
+      PostNotifierJob.perform_later(user.id, post.id)
+    end
   end
 end
