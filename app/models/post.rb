@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   mount_uploaders :attachments, AttachmentUploader
   belongs_to :group
+  has_many :revisions, dependent: :destroy
 
   validates :title, presence: true
   validates :body,  presence: true

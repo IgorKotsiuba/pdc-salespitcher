@@ -3,7 +3,7 @@
     = f.input :title
     = f.input :body, as: :text
     = f.association :group, prompt: "Choose a group"
-    = f.input :attachments, as: :file, multiple: true
+    = f.input :attachments, as: :file, input_html: { multiple: true }
     = f.input :attachments_cache, as: :hidden
   .form-group
     .col-sm-12

@@ -4,7 +4,7 @@ class User::PostsController < User::ApplicationController
   end
 
   def show
-    binding.pry
     @post = ::Post.find_by(uuid: params[:uuid])
+    @post.revisions.create(user: current_user) if @post.present? && !@post.revisions.exists?(user: current_user)
   end
 end
