@@ -7,8 +7,7 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title= content_for?(:title) ? yield(:title) : "PdcSalespitcher"
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag "application", :media => "all"
   %body
     .navbar.navbar-default.navbar-static-top
       .container
@@ -19,30 +18,13 @@
         %a.navbar-brand{:href => "#"} PdcSalespitcher
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
-            %li= link_to 'Posts', admin_posts_url
-            %li= link_to 'Users', admin_users_url
+            %li= link_to 'Posts', user_posts_url
             %li= link_to 'User Groups', admin_groups_url
-            - if admin_signed_in?
-              %ul.nav.navbar-nav.navbar-right
-                %p.navbar-text= current_admin.email
-                %li
-                  = link_to('Logout', destroy_admin_session_path, class: 'navbar-link')
     .container
       .row
-        .col-sm-9
+        .col-sm-12
           = bootstrap_flash
           = yield
-        .col-sm-3
-          .well.sidebar-nav
-            %h3 Filter
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to 'Users', "/path1"
-              %li= link_to 'Posts', "/path2"
-              %li= link_to 'User Groups', "/path3"
-          / /.well
-        / /span
-      / /row
       %footer
         %p © Company 2018
     / /container
