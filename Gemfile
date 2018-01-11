@@ -11,7 +11,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'haml'
 gem 'jquery-rails'
 gem 'devise'
-gem 'less-rails'
 gem "therubyracer"
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'
