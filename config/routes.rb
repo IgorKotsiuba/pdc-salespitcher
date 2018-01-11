@@ -1,16 +1,8 @@
 Rails.application.routes.draw do
-  root 'landing#show'
+  devise_for :users,  path: 'users', controllers:  { sessions: "user/sessions" }
+  devise_for :admins, path: 'admins', controllers: { sessions: "admin/sessions" }
 
-  devise_for :users
-  devise_for :admins
-
-  authenticated :admin do
-    root 'admin/users#index', as: :authenticated_root
-  end
-
-  authenticated :users do
-    root 'users/posts#index', as: :authenticated_user_root
-  end
+  root to: 'landing#show'
 
   namespace :admin do
     resources :users

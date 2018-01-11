@@ -20,9 +20,16 @@
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
             %li= link_to 'Posts', user_posts_url
+            - if user_signed_in?
+              %li
+                %a{:href => "mailto:#{current_user.email}"}= current_user.email
+              %li
+                = link_to('Logout', destroy_user_session_path, method: :delete, class: 'navbar-link')
     .container
       .row
         .col-sm-12
           = yield
-  %footer
-    %p.text-center © Company 2018
+    %footer
+      %p.text-center © Company 2018
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
