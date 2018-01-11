@@ -1,111 +1,59 @@
 require 'rails_helper'
 
 RSpec.describe Admin::PostsController, type: :controller do
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  before { sign_in admin }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  let(:valid_session) { {} }
-
-  describe "GET #index" do
-    it "returns a success response" do
-      post = Post.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
-  describe "GET #show" do
-    it "returns a success response" do
-      post = Post.create! valid_attributes
-      get :show, params: {id: post.to_param}, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new, params: {}, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
-  describe "GET #edit" do
-    it "returns a success response" do
-      post = Post.create! valid_attributes
-      get :edit, params: {id: post.to_param}, session: valid_session
-      expect(response).to be_success
-    end
-  end
+  let!(:admin) { create :admin }
+  let!(:post1) { create :post, title: 'Opsss', body: 'No content' }
+  let!(:post2) { create :post }
+  let!(:group) { create :group }
 
   describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Admin::Post" do
+    let(:file1) do
+      Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'files', 'attention.jpg'), 'image/jpeg')
+    end
+    let(:valid_attributes) do
+      { title: 'Attention', body: 'Attention, please', group_id: group.id, attachments: [file1] }
+    end
+
+    context 'with valid params' do
+      it 'creates a new post' do
         expect {
-          post :create, params: {post: valid_attributes}, session: valid_session
+          post :create, params: { post: valid_attributes }
         }.to change(Post, :count).by(1)
+
+        Post.last.tap do |post|
+          expect(post.title).to                           eq 'Attention'
+          expect(post.body).to                            eq 'Attention, please'
+          expect(post.attachments.first.file.filename).to eq 'attention.jpg'
+        end
       end
 
       it "redirects to the created admin_post" do
-        post :create, params: {post: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Post.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {post: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        post :create, params: { post: valid_attributes }
+        expect(response).to redirect_to(admin_post_path(Post.last))
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  describe 'PUT #update' do
+    context 'with valid params' do
+      let(:new_attributes) { { title: 'Attention', body: 'Attention, please' } }
 
-      it "updates the requested admin_post" do
-        post = Post.create! valid_attributes
-        put :update, params: {id: post.to_param, post: new_attributes}, session: valid_session
-        post.reload
-        skip("Add assertions for updated state")
-      end
+      it 'updates the requested admin_post' do
+        put :update, params: {id: post1.id, post: new_attributes}
+        post1.reload
 
-      it "redirects to the admin_post" do
-        post = Post.create! valid_attributes
-        put :update, params: {id: post.to_param, post: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(post)
-      end
-    end
-
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        post = Post.create! valid_attributes
-        put :update, params: {id: post.to_param, post: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(post1.title).to eq 'Attention'
+        expect(post1.body).to  eq 'Attention, please'
+        expect(post1.attachments).to be_empty
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested admin_post" do
-      post = Post.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: post.to_param}, session: valid_session
-      }.to change(Post, :count).by(-1)
-    end
-
-    it "redirects to the admin_posts list" do
-      post = Post.create! valid_attributes
-      delete :destroy, params: {id: post.to_param}, session: valid_session
-      expect(response).to redirect_to(admin_posts_url)
+  describe 'DELETE #destroy' do
+    it 'destroys the requested admin_post' do
+      expect { delete :destroy, params: {id: post1.id} }.to change(Post, :count).by(-1)
     end
   end
-
 end
