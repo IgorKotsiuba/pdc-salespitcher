@@ -12,6 +12,7 @@
         %th= model_class.human_attribute_name(:title)
         %th= model_class.human_attribute_name(:attachments)
         %th= model_class.human_attribute_name(:date)
+        %th= model_class.human_attribute_name(:users)
         %th= model_class.human_attribute_name(:reviewed)
         %th= t '.actions', default: t('helpers.actions')
     %tbody
@@ -20,6 +21,7 @@
           %td= post.title
           %td= post.attachments.count
           %td= post.created_at.strftime('%d.%m.%Y')
+          %td= post.group.users.count
           %td= number_to_percentage(post.revisions.count * 100 / post.group.users.count, precision: 2)
           %td
             = link_to t('.show', default: t('helpers.links.show')), admin_post_path(post), class: 'btn btn-default btn-xs'
