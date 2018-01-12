@@ -23,6 +23,7 @@ Things you may want to cover:
 * Database creation
   ```sh
     rails db:create db:migrate
+    rails db:seed
   ```
 
 * How to run the test suite

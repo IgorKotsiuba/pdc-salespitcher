@@ -45,12 +45,15 @@
           %h1.title Filter
           .well
             %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to 'Users', "/path1"
-              %li= link_to 'Posts', "/path2"
-              %li= link_to 'User Groups', "/path3"
+              %li.form-group
+                %label Title
+                %input.form-control{ placeholder: 'Title' }
+              %li.form-group
+                %label Date
+                %input.form-control{ placeholder: 'Date' }
+              %button.btn.btn-primary{type: 'submit'} Submit
 
-    %footer
+    .footer
       .container
         .row
           .col-sm-12

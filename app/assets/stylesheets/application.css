@@ -9,6 +9,8 @@
 #pageTop{
   background: url("header.jpg");
   background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .landing-page{
