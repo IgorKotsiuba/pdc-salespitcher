@@ -1,30 +1,9 @@
-.container
-  .header.clearfix
-    %nav
-      %ul.nav.nav-pills.pull-right
-        %li
-          = link_to 'Login As Admin', new_admin_session_path
-        %li
-          = link_to 'Login As User', new_user_session_path
-  .jumbotron
-    %h1 Test Project
-    %p.lead Do not hesitate to contact with us.
-
-  .row.marketing
-    .col-lg-6
-      %h4 Subheading
-      %p Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
-      %h4 Subheading
-      %p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-      %h4 Subheading
-      %p Maecenas sed diam eget risus varius blandit sit amet non magna.
-    .col-lg-6
-      %h4 Subheading
-      %p Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
-      %h4 Subheading
-      %p Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-      %h4 Subheading
-      %p Maecenas sed diam eget risus varius blandit sit amet non magna.
-  %footer.footer
-    %p © 2018 Company, Inc.
-
+.container.landing-page
+  .row
+    .col-lg-10.mx-auto
+      %h1.text-uppercase.text-center
+        %strong Your Favorite Source of Free Bootstrap Themes
+      %hr/
+    .col-lg-10.mx-auto.text-center
+      %p.text-faded.mb-5 Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!
+      %a.btn.btn-primary.btn-xl.js-scroll-trigger{:href => "#about"} Find Out More

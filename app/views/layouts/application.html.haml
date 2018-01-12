@@ -1,10 +1,67 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title PdcSalespitcher
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
+
+  %body#pageTop
+    %nav.navbar.navbar-default
+      .container-fluid
+        .navbar-left
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#menuCollapsible", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+
+            %a.navbar-brand{:href => "#{}"} Pdc Salespitcher
+        .navbar-right
+          #menuCollapsible.collapse.navbar-collapse
+            %ul.nav.navbar-nav
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "#about"} About
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "#services"} Services
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "#portfolio"} Portfolio
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "#contact"} Contact
+              - if admin_signed_in?
+                %li
+                  %a{:href => "mailto:#{current_admin.email}"}= current_admin.email
+                %li
+                  = link_to('Logout', destroy_admin_session_path, class: 'navbar-link')
+              - if user_signed_in?
+                %li
+                  %a{:href => "mailto:#{current_user.email}"}= current_user.email
+                %li
+                  = link_to('Logout', destroy_user_session_path, class: 'navbar-link')
+              -else
+                %li
+                  = link_to 'Login As Admin', new_admin_session_path
+                %li
+                  = link_to 'Login As User', new_user_session_path
     = yield
+
+    .footer
+      %section
+        .container
+          .row
+            .col-lg-10.mx-auto.text-center
+              %h2.section-heading Let's Get In Touch!
+              %hr.my-4/
+              %p.mb-5 Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!
+          .row
+            .col-lg-5.ml-auto.text-center
+              %i.fa.fa-phone.fa-3x.mb-3.sr-contact
+              %p.sourse-contact 123-456-6789
+            .col-lg-5.mr-auto.text-center
+              %i.fa.fa-envelope-o.fa-3x.mb-3.sr-contact
+              %p
+                %a{href: "mailto:support@salespitcher.com"} support@salespitcher.com
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
