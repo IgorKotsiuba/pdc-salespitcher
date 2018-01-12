@@ -1,35 +1,13 @@
-= form_for([:admin, user], html: { class: 'form-horizontal user' }) do |f|
-  - if user.errors.any?
-    #error_expl.panel.panel-danger
-      .panel-heading
-        %h3.panel-title
-          = pluralize(user.errors.count, 'error')
-          prohibited this user from being saved:
-      .panel-body
-        %ul
-          - user.errors.full_messages.each do |msg|
-            %li= msg
+= simple_form_for([:admin, user], html: { class: 'form-horizontal user' }) do |f|
+  .col-md-12
+    = f.input :email, require: true
+    - unless params['action'].eql?('edit')
+      = f.input :password, require: true
+      = f.input :password_confirmation, require: true
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :phone_number
   .form-group
-    = f.label :email, class: 'control-label col-sm-2'
-    .col-sm-10
-      = f.text_field :email, class: 'form-control'
-    = f.error_span(:email)
-  .form-group
-    = f.label :first_name, class: 'control-label col-sm-2'
-    .col-sm-10
-      = f.text_field :first_name, class: 'form-control'
-    = f.error_span(:first_name)
-  .form-group
-    = f.label :last_name, class: 'control-label col-sm-2'
-    .col-sm-10
-      = f.text_field :last_name, class: 'form-control'
-    = f.error_span(:last_name)
-  .form-group
-    = f.label :phone_number, class: 'control-label col-sm-2'
-    .col-sm-10
-      = f.text_field :phone_number, class: 'form-control'
-    = f.error_span(:phone_number)
-  .form-group
-    .col-sm-offset-2.col-sm-10
+    .col-sm-12
       = f.submit nil, class: 'btn btn-primary'
       = link_to t('.cancel', default: t("helpers.links.cancel")), admin_users_path, class: 'btn btn-default'
