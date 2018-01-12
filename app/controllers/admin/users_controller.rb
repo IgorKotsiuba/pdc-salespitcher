@@ -51,6 +51,6 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def permitted_params
-    params.require(:user).permit(:first_name, :last_name, :email, :phone_number)
+    params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :password, :password_confirmation)
   end
 end
