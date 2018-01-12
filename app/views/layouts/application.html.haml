@@ -1,10 +1,69 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title PdcSalespitcher
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
+    %title Creative - Start Bootstrap Theme
+    / Bootstrap core CSS
+    %link{:href => "vendor/bootstrap/css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Custom fonts for this template
+    %link{:href => "vendor/font-awesome/css/font-awesome.min.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic", :rel => "stylesheet", :type => "text/css"}/
+    / Plugin CSS
+    %link{:href => "vendor/magnific-popup/magnific-popup.css", :rel => "stylesheet"}/
+
+    / Custom styles for this template
+    %link{:href => "https://blackrockdigital.github.io/startbootstrap-creative/css/creative.min.css", :rel => "stylesheet"}/
+
+    / Bootstrap core JavaScript
+    %script{:src => "vendor/jquery/jquery.min.js"}
+    %script{:src => "vendor/bootstrap/js/bootstrap.bundle.min.js"}
+    / Plugin JavaScript
+    %script{:src => "vendor/jquery-easing/jquery.easing.min.js"}
+    %script{:src => "vendor/scrollreveal/scrollreveal.min.js"}
+    %script{:src => "vendor/magnific-popup/jquery.magnific-popup.min.js"}
+    / Custom scripts for this template
+    %script{:src => "js/creative.min.js"}
+
+
+  %body#page-top
+    / Navigation
+    %nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
+      .container
+        %a.navbar-brand.js-scroll-trigger{:href => "#page-top"} Start Bootstrap
+        %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarResponsive", "aria-expanded" => false, "aria-label" => "Toggle navigation", "data-target" => "#navbarResponsive", "data-toggle" => "collapse", :type => "button"}
+          %span.navbar-toggler-icon
+
+        #navbarResponsive.collapse.navbar-collapse
+          %ul.navbar-nav.ml-auto
+            %li.nav-item
+              %a.nav-link.js-scroll-trigger{:href => "#about"} About
+            %li.nav-item
+              %a.nav-link.js-scroll-trigger{:href => "#services"} Services
+            %li.nav-item
+              %a.nav-link.js-scroll-trigger{:href => "#portfolio"} Portfolio
+            %li.nav-item
+              %a.nav-link.js-scroll-trigger{:href => "#contact"} Contact
     = yield
+
+    %section#contact
+      .container
+        .row
+          .col-lg-8.mx-auto.text-center
+            %h2.section-heading Let's Get In Touch!
+            %hr.my-4/
+            %p.mb-5 Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!
+        .row
+          .col-lg-4.ml-auto.text-center
+            %i.fa.fa-phone.fa-3x.mb-3.sr-contact
+            %p 123-456-6789
+          .col-lg-4.mr-auto.text-center
+            %i.fa.fa-envelope-o.fa-3x.mb-3.sr-contact
+            %p
+              %a{:href => "mailto:your-email@your-domain.com"} feedback@startbootstrap.com
+    %footer.footer
+      %p © 2018 Company, Inc.
