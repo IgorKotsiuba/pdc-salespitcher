@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem "therubyracer"
 gem 'twitter-bootstrap-rails'
+gem 'font-awesome-rails'
 gem 'simple_form'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'

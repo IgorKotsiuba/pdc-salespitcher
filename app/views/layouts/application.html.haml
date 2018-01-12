@@ -6,64 +6,62 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    %title Creative - Start Bootstrap Theme
-    / Bootstrap core CSS
-    %link{:href => "vendor/bootstrap/css/bootstrap.min.css", :rel => "stylesheet"}/
-    / Custom fonts for this template
-    %link{:href => "vendor/font-awesome/css/font-awesome.min.css", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic", :rel => "stylesheet", :type => "text/css"}/
-    / Plugin CSS
-    %link{:href => "vendor/magnific-popup/magnific-popup.css", :rel => "stylesheet"}/
 
-    / Custom styles for this template
-    %link{:href => "https://blackrockdigital.github.io/startbootstrap-creative/css/creative.min.css", :rel => "stylesheet"}/
+  %body#pageTop
+    %nav.navbar.navbar-default
+      .container-fluid
+        .navbar-left
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#menuCollapsible", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
 
-    / Bootstrap core JavaScript
-    %script{:src => "vendor/jquery/jquery.min.js"}
-    %script{:src => "vendor/bootstrap/js/bootstrap.bundle.min.js"}
-    / Plugin JavaScript
-    %script{:src => "vendor/jquery-easing/jquery.easing.min.js"}
-    %script{:src => "vendor/scrollreveal/scrollreveal.min.js"}
-    %script{:src => "vendor/magnific-popup/jquery.magnific-popup.min.js"}
-    / Custom scripts for this template
-    %script{:src => "js/creative.min.js"}
-
-
-  %body#page-top
-    / Navigation
-    %nav#mainNav.navbar.navbar-expand-lg.navbar-light.fixed-top
-      .container
-        %a.navbar-brand.js-scroll-trigger{:href => "#page-top"} Start Bootstrap
-        %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarResponsive", "aria-expanded" => false, "aria-label" => "Toggle navigation", "data-target" => "#navbarResponsive", "data-toggle" => "collapse", :type => "button"}
-          %span.navbar-toggler-icon
-
-        #navbarResponsive.collapse.navbar-collapse
-          %ul.navbar-nav.ml-auto
-            %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#about"} About
-            %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#services"} Services
-            %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#portfolio"} Portfolio
-            %li.nav-item
-              %a.nav-link.js-scroll-trigger{:href => "#contact"} Contact
+            %a.navbar-brand{:href => "#{}"} Pdc Salespitcher
+        .navbar-right
+          #menuCollapsible.collapse.navbar-collapse
+            %ul.nav.navbar-nav
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "#about"} About
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "#services"} Services
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "#portfolio"} Portfolio
+              %li.nav-item
+                %a.nav-link.js-scroll-trigger{:href => "#contact"} Contact
+              - if admin_signed_in?
+                %li
+                  %a{:href => "mailto:#{current_admin.email}"}= current_admin.email
+                %li
+                  = link_to('Logout', destroy_admin_session_path, class: 'navbar-link')
+              - if user_signed_in?
+                %li
+                  %a{:href => "mailto:#{current_user.email}"}= current_user.email
+                %li
+                  = link_to('Logout', destroy_user_session_path, class: 'navbar-link')
+              -else
+                %li
+                  = link_to 'Login As Admin', new_admin_session_path
+                %li
+                  = link_to 'Login As User', new_user_session_path
     = yield
 
-    %section#contact
-      .container
-        .row
-          .col-lg-8.mx-auto.text-center
-            %h2.section-heading Let's Get In Touch!
-            %hr.my-4/
-            %p.mb-5 Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!
-        .row
-          .col-lg-4.ml-auto.text-center
-            %i.fa.fa-phone.fa-3x.mb-3.sr-contact
-            %p 123-456-6789
-          .col-lg-4.mr-auto.text-center
-            %i.fa.fa-envelope-o.fa-3x.mb-3.sr-contact
-            %p
-              %a{:href => "mailto:your-email@your-domain.com"} feedback@startbootstrap.com
-    %footer.footer
-      %p © 2018 Company, Inc.
+    .footer
+      %section
+        .container
+          .row
+            .col-lg-10.mx-auto.text-center
+              %h2.section-heading Let's Get In Touch!
+              %hr.my-4/
+              %p.mb-5 Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!
+          .row
+            .col-lg-5.ml-auto.text-center
+              %i.fa.fa-phone.fa-3x.mb-3.sr-contact
+              %p.sourse-contact 123-456-6789
+            .col-lg-5.mr-auto.text-center
+              %i.fa.fa-envelope-o.fa-3x.mb-3.sr-contact
+              %p
+                %a{href: "mailto:support@salespitcher.com"} support@salespitcher.com
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
