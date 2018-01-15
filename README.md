@@ -1,7 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Intranet like Website where the HR department can create Posts and distribute them to their employees.
 
 Things you may want to cover:
 
@@ -9,6 +8,7 @@ Things you may want to cover:
   - 2.5.0
 
 * System dependencies
+  - redis
 
 * Configuration
   ```sh
