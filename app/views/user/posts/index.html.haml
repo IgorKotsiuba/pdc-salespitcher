@@ -13,6 +13,6 @@
         %tr
           %td= post.title
           %td= post.attachments.count
-          %td= post.created_at
+          %td= post.created_at.strftime('%d.%m.%Y')
           %td
-            = link_to 'Show', controller: "posts", action: "show", uuid: post.uuid, class: 'btn btn-default btn-xs'
+            = link_to 'Show', "/user/posts/#{post.uuid}", class: 'btn btn-default btn-xs'
