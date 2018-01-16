@@ -10,26 +10,33 @@
     = stylesheet_link_tag "application", :media => "all"
   %body
     = bootstrap_flash
-    .navbar.navbar-default.navbar-static-top
-      .container
-        %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand{:href => "#{root_path}"} PdcSalespitcher
-        .navbar-collapse.collapse.navbar-responsive-collapse
-          %ul.nav.navbar-nav
-            %li= link_to 'Posts', user_posts_url
-            - if user_signed_in?
-              %li
-                %a{:href => "mailto:#{current_user.email}"}= current_user.email
-              %li
-                = link_to('Logout', destroy_user_session_path, method: :delete, class: 'navbar-link')
-    .container
+    %nav.navbar.navbar-default
+      .container-fluid
+        .navbar-left
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#menuCollapsible", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+
+            %a.navbar-brand{:href => "#{root_path}"} Pdc Salespitcher
+        .navbar-right
+          #menuCollapsible.collapse.navbar-collapse
+            %ul.nav.navbar-nav
+              %li= link_to 'Posts', user_posts_url
+              - if user_signed_in?
+                %li
+                  %a{:href => "mailto:#{current_user.email}"}= current_user.email
+                %li
+                  = link_to('Logout', destroy_user_session_path, method: :delete, class: 'navbar-link')
+
+    .container.user-landing-page
       .row
         .col-sm-12
           = yield
-    .footer
-      %p.text-center © Company 2018
+    %footer
+      %p.text-center
+        = '© Company ' + Time.current.year.to_s
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
     %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}

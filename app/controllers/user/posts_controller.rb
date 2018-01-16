@@ -5,6 +5,12 @@ class User::PostsController < User::ApplicationController
 
   def show
     @post = current_user.posts.find_by(uuid: params[:uuid])
-    @post.revisions.create(user: current_user) if @post.present? && !@post.revisions.exists?(user: current_user)
+
+    if @post.present? && !@post.revisions.exists?(user: current_user)
+      @post.revisions.create(user: current_user)
+      ActionCable.server.broadcast(
+        'post_revisions', revision_count: @post.revisions.count, post_id: @post.id, users_count: @post.group.users.count
+      )
+    end
   end
 end

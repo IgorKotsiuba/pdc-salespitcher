@@ -19,6 +19,16 @@
   color: white;
 }
 
+.user-landing-page{
+  height: calc(100vh - 306px);
+  overflow-y: auto;
+}
+
+.admin-landing-page{
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
 .sourse-contact{
   color: white;
 }
